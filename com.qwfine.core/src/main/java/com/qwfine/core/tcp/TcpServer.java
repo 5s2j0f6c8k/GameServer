@@ -12,6 +12,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -33,9 +34,13 @@ public class TcpServer implements IServer  {
         boot.group(bossGroup, workerGroup);
         boot.channel(NioServerSocketChannel.class);
         boot.option(ChannelOption.SO_BACKLOG, 256);
+
+        boot.childHandler(new HeartbeatHandlerInitializer());
+
         boot.childHandler(new ChannelInitializer() {
             protected void initChannel(Channel ch) throws Exception {
                 ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO))
+                        .addLast(new IdleStateHandler(10, 0, 0))
                         .addLast("decoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, 0, 2))
                         .addLast(new GameChannelInboundHandler(gameActorHandler));
             }
