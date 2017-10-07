@@ -1,6 +1,6 @@
 package com.qwfine.core.db;
 
-import com.qwfine.util.ConfigUtil;
+import com.qwfine.core.comm.ConfigUtil;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;

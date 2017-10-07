@@ -1,10 +1,8 @@
-package com.qwfine.core.tcp;
+package com.qwfine.core.connecter;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
-import com.qwfine.core.IServer;
-import com.qwfine.core.messageActor.GameActorHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -13,8 +11,6 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 
 /**
 * @author   作者: qugang
@@ -22,7 +18,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 * @date     创建时间：2017/10/7
 * 类说明     Tcp 接入类，使用2个字节长度高位在前低位在后
 */
-public class TcpServer implements IServer  {
+public class TcpConnecterServer implements IConnecterServer  {
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -35,14 +31,12 @@ public class TcpServer implements IServer  {
         boot.channel(NioServerSocketChannel.class);
         boot.option(ChannelOption.SO_BACKLOG, 256);
 
-        boot.childHandler(new HeartbeatHandlerInitializer());
-
         boot.childHandler(new ChannelInitializer() {
             protected void initChannel(Channel ch) throws Exception {
                 ch.pipeline().addLast(new LoggingHandler(LogLevel.INFO))
                         .addLast(new IdleStateHandler(10, 0, 0))
                         .addLast("decoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, 0, 2))
-                        .addLast(new GameChannelInboundHandler(gameActorHandler));
+                        .addLast(new ConnecterChannelInboundHandler(gameActorHandler));
             }
         });
         try {

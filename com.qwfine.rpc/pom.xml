@@ -9,19 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>com.qwfine.connecter</artifactId>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <artifactId>com.qwfine.rpc</artifactId>
+    <groupId>com.qwfine.rpc</groupId>
+
     <dependencies>
         <dependency>
             <groupId>com.typesafe.akka</groupId>
@@ -32,5 +22,4 @@
             <artifactId>akka-actor_2.12</artifactId>
         </dependency>
     </dependencies>
-
 </project>

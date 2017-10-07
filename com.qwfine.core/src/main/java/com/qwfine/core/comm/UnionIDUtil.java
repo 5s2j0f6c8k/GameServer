@@ -1,4 +1,4 @@
-package com.qwfine.util;
+package com.qwfine.core.comm;
 import java.util.UUID;
 
 public class UnionIDUtil {

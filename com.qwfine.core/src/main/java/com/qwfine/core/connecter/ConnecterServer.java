@@ -1,18 +1,18 @@
-package com.qwfine.core;
+package com.qwfine.core.connecter;
 
 
 import com.qwfine.core.protocol.ProtocolFactory;
 import com.qwfine.core.db.RedisPool;
-import com.qwfine.util.ConfigUtil;
+import com.qwfine.core.comm.ConfigUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameServer {
-    private IServer server;
+public class ConnecterServer {
+    private IConnecterServer server;
 
     @Autowired
-    public GameServer(IServer server){
+    public ConnecterServer(IConnecterServer server){
         this.server = server;
     }
 

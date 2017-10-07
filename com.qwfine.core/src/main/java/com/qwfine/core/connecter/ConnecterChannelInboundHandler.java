@@ -1,8 +1,7 @@
-package com.qwfine.core.tcp;
+package com.qwfine.core.connecter;
 
 import akka.actor.ActorRef;
-import com.qwfine.core.messageActor.GameActorHandler;
-import com.qwfine.util.UnionIDUtil;
+import com.qwfine.core.comm.UnionIDUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -19,11 +18,11 @@ import io.netty.util.CharsetUtil;
 * @date     创建时间：2017/10/7
 * 类说明     连接消息处理类
 */
-public class GameChannelInboundHandler extends ChannelInboundHandlerAdapter {
+public class ConnecterChannelInboundHandler extends ChannelInboundHandlerAdapter {
 
     private ActorRef gameActorHandler;
 
-    GameChannelInboundHandler(ActorRef gameActorHandler){
+    ConnecterChannelInboundHandler(ActorRef gameActorHandler){
         this.gameActorHandler = gameActorHandler;
     }
 
