@@ -11,6 +11,7 @@
     <modules>
         <module>com.qwfine.util</module>
         <module>com.qwfine.gameserver</module>
+        <module>com.qwfine.connecter</module>
     </modules>
 
     <properties>

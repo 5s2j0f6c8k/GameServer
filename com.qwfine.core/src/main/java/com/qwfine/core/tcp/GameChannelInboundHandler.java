@@ -36,6 +36,7 @@ public class GameChannelInboundHandler extends ChannelInboundHandlerAdapter {
         ByteBuf in = (ByteBuf)msg;
         byte[] reviceByte = new byte[in.readableBytes()];
         in.readBytes(reviceByte);
+        gameActorHandler.tell(new GameActorHandler.ByteMessage(reviceByte,ctx),null);
         super.channelRead(ctx, msg);
     }
 
